@@ -1,5 +1,7 @@
 CREATE SCHEMA `tiktok_management` ;
 
+use tiktok_management;
+
 create table user(
 	uid int not null,
     nickname varchar(50),

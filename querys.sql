@@ -5,7 +5,7 @@ use tiktok_management;
 create table user(
 	uid int not null,
     nickname varchar(50),
-    password varchar(50),
+    password varchar(70),
     age int,
     star int,
     primary key(uid));
@@ -26,9 +26,9 @@ alter table movie add foreign key(user) references user(uid);
 
 alter table movie add foreign key(song) references music(music_id);
 
-insert into user values(null,"권도형","kwon123","40",1);
-insert into user values(null,"김범수","kakao123","50",4);
-insert into user values(null,"이재용","samsungman","15",5);
+insert into user values(null,"권도형","kwon123",40,1);
+insert into user values(null,"김범수","kakao123",50,4);
+insert into user values(null,"이재용","samsungman",15,5);
 
 insert into music values(null,"masterpiece");
 insert into music values(null,"re:wind");

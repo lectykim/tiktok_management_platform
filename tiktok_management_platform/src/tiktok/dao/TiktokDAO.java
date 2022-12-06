@@ -23,8 +23,8 @@ public class TiktokDAO {
                 user.setUid(rs.getInt("uid"));
                 user.setNickname(rs.getString("nickname"));
                 user.setPassword(rs.getString("password"));
-                user.setAge(rs.getString("age"));
-                user.setStar(rs.getString("star"));
+                user.setAge(rs.getInt("age"));
+                user.setStar(rs.getInt("star"));
             }
         } catch (SQLException e) {
             e.printfStackTrace();
@@ -53,18 +53,18 @@ public class TiktokDAO {
         return music;
     }
     
-    public ArrayList<MovieVO> GetMovieDatas(Connection con, int movieID) {
+    public ArrayList<MovieVO> GetMovieDatas(String st) {
         ArrayList<MovieVO> movieList = new ArrayList<MovieVO>();
         
         try {
             String query = "SELECT movie_id, user, len, song FROM movie WHERE movie_id LIKE ?";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, "%" + movieID + "%");
+            PreparedStatement ps = st.prepareStatement(query);
+            ps.setString(1, "%" + movie + "%");
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
                 MovieVO movie = new MovieVO();
-                movie.setMusicId(rs.getInt("movie_id"));
+                movie.setMovieId(rs.getInt("movie_id"));
                 movie.setUser(rs.getInt("user"));
                 movie.setLen(rs.getString("len"));
                 movie.setSong(rs.getInt("song"));
@@ -76,4 +76,6 @@ public class TiktokDAO {
         
         return movieList;
     }
+
+	
 }

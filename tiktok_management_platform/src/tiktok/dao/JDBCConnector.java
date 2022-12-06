@@ -7,22 +7,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBCConnector {
-	// Æ÷Æ®¹øÈ£ÀÇ ¿ªÇÒ : ex) À¯ÇÑ´ë - (±³ÇÐ°ú 21, ÇàÁ¤°ú 20, ...)
-	// ´ëÇ¥ÀüÈ­ ¿ªÇÒÀÌ URL, °ú ÀüÈ­¹øÈ£°¡ Æ÷Æ®¹øÈ£
+	// ï¿½ï¿½Æ®ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : ex) ï¿½ï¿½ï¿½Ñ´ï¿½ - (ï¿½ï¿½ï¿½Ð°ï¿½ 21, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 20, ...)
+	// ï¿½ï¿½Ç¥ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ URL, ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½È£
 	
-	/// ±âº» ¼³Á¤ - base configuration
-	private static final String DRIVER_PATH = "com.mysql.cj.jdbc.Driver"; // ¸Þ¸ð¸®¿¡ ·ÎµùÇÒ ¼ö ÀÖ´Ù.
+	/// ï¿½âº» ï¿½ï¿½ï¿½ï¿½ - base configuration
+	private static final String DRIVER_PATH = "com.mysql.cj.jdbc.Driver"; // ï¿½Þ¸ð¸®¿ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
 	private static final String URL = "jdbc:mysql://127.0.0.1:3306/tiktok_management?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8"; 
 	private static final String ID = "root";
-	private static final String PWD = "root"; //root,1234Áß¿¡¼­ °ñ¶ó¼­ ¼³Á¤
+	private static final String PWD = "root"; //root,1234ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private static Connection con;
 	
 	public static Connection getCon() {
 		try {
 			Class.forName(DRIVER_PATH);
-			System.out.println("Á¤»óÀûÀ¸·Î JDBC Driver°¡ Road µÇ¾ú½À´Ï´Ù.");
-			con = DriverManager.getConnection(URL, ID, PWD); // ¿¹¿Ü Ã³¸®¸¦ ÇØ¾ß »ç¿ëÇÒ ¼ö ÀÖ´Ù.
-			System.out.println("¿¬°áÀÌ Àß µÇ¾ú½À´Ï´Ù.");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ JDBC Driverï¿½ï¿½ Road ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+			con = DriverManager.getConnection(URL, ID, PWD); // ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		} catch (ClassNotFoundException e) { 
 			e.printStackTrace();
 		} catch (SQLException e) { 
@@ -35,7 +35,7 @@ public class JDBCConnector {
 		try {
 			Statement stmt = con.createStatement();
 			String sql = "select * from user";
-			ResultSet rs = stmt.executeQuery(sql);  // sql ¸í·É¾îÀÇ Á¾·ù¸¶´Ù ¸Þ¼Òµå°¡ ´Ù¸£´Ù.
+			ResultSet rs = stmt.executeQuery(sql);  // sql ï¿½ï¿½É¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµå°¡ ï¿½Ù¸ï¿½ï¿½ï¿½.
 			while (rs.next()) {
 				System.out.print(rs.getString("nickname") + "\t");
 				System.out.print(rs.getString("password") + "\t");

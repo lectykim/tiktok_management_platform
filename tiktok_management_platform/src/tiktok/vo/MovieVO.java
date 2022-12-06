@@ -2,10 +2,10 @@ package tiktok.vo;
 
 public class MovieVO {
 
-	private int movieId;
-	private int user;
-	private String len;
-	private int song;
+	private int movieId; // 영상 번호
+	private int user; // 유저 번호
+	private String len; // 영상 길이
+	private int song; // 사용된 음악
 	public int getMovieId() {
 		return movieId;
 	}

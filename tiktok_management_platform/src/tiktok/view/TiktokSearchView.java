@@ -89,9 +89,9 @@ public class TiktokSearchView extends JPanel{
 	}
 		
 	// getter method
-	public String getMovieId() {
+	public int getMovieId() {
 		searchWord = tf.getText();
-		return searchWord;
+		return Integer.parseInt(searchWord);
 	}
 	public JButton getBtnSearch() {
 		return btnSearch;

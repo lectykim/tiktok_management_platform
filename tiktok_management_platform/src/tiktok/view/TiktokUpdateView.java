@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import tiktok.vo.MovieVO;
 
-public class TiktokUpdateView {
+public class TiktokUpdateView extends JPanel{
 
 	JButton btnSearch;
 	ArrayList<MovieVO> MovieVOList;
@@ -95,7 +95,7 @@ public class TiktokUpdateView {
 	}
 	
 	// setter method를 만든 것이다.
-	public void setBookVOList(ArrayList<MovieVO> MovieVOList) {
+	public void setMovieVOList(ArrayList<MovieVO> MovieVOList) {
 		this.MovieVOList = MovieVOList;
 	}
 	public MovieVO neededUpdateData() {
@@ -109,12 +109,9 @@ public class TiktokUpdateView {
 	public JTable getTable() {
 		return table;
 	}
-}
-	
-	
-	public static void main(String[] args) {
-		
-
-	}
-
+	// getter method
+		public int getMovieId() {
+			searchWord = tf[0].getText();
+			return Integer.parseInt(searchWord);
+		}
 }

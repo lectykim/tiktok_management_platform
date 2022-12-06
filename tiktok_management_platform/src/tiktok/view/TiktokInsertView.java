@@ -19,6 +19,7 @@ public class TiktokInsertView extends JPanel {
 	ArrayList<MovieVO> MovieVOList;
 	JTable table; 
 	DefaultTableModel model;
+	String searchword;
 	JPanel panS = new JPanel(new GridLayout(4,4));
 	String [] header = {"영상 번호", "유저 이름", "영상 길이", "사용된 음악"};
 	JLabel [] lbls = new JLabel[header.length];
@@ -95,5 +96,11 @@ public class TiktokInsertView extends JPanel {
 		vo.setLen(tf[1].getText());
 		vo.setSong(Integer.parseInt(tf[2].getText()));
 		return vo;
+	}
+	// getter method
+		
+	public int getMovieId() {
+		searchword = tf[0].getText();
+		return Integer.parseInt(searchword);
 	}
 }

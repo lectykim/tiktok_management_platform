@@ -7,22 +7,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBCConnector {
-	// ��Ʈ��ȣ�� ���� : ex) ���Ѵ� - (���а� 21, ������ 20, ...)
-	// ��ǥ��ȭ ������ URL, �� ��ȭ��ȣ�� ��Ʈ��ȣ
+	// 占쏙옙트占쏙옙호占쏙옙 占쏙옙占쏙옙 : ex) 占쏙옙占싼댐옙 - (占쏙옙占싻곤옙 21, 占쏙옙占쏙옙占쏙옙 20, ...)
+	// 占쏙옙표占쏙옙화 占쏙옙占쏙옙占쏙옙 URL, 占쏙옙 占쏙옙화占쏙옙호占쏙옙 占쏙옙트占쏙옙호
 	
-	/// �⺻ ���� - base configuration
-	private static final String DRIVER_PATH = "com.mysql.cj.jdbc.Driver"; // �޸𸮿� �ε��� �� �ִ�.
+	/// 占썩본 占쏙옙占쏙옙 - base configuration
+	private static final String DRIVER_PATH = "com.mysql.cj.jdbc.Driver"; // 占쌨모리울옙 占싸듸옙占쏙옙 占쏙옙 占쌍댐옙.
 	private static final String URL = "jdbc:mysql://127.0.0.1:3306/tiktok_management?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8";
 	private static final String ID = "root";
-	private static final String PWD = "1234"; //root,1234�߿��� ��� ����
+	private static final String PWD = "root"; //root,1234占쌩울옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
 	private static Connection con;
 	
 	public static Connection getCon() {
 		try {
 			Class.forName(DRIVER_PATH);
-			System.out.println("정상적으로 JDBC Driver가 Road 되었습니다..");
-			con = DriverManager.getConnection(URL, ID, PWD); // ���� ó���� �ؾ� ����� �� �ִ�.
-			System.out.println("연결이 잘 되었습니다.");
+			System.out.println("�젙�긽�쟻�쑝濡� JDBC Driver媛� Road �릺�뿀�뒿�땲�떎..");
+			con = DriverManager.getConnection(URL, ID, PWD); // 占쏙옙占쏙옙 처占쏙옙占쏙옙 占쌔억옙 占쏙옙占쏙옙占� 占쏙옙 占쌍댐옙.
+			System.out.println("�뿰寃곗씠 �옒 �릺�뿀�뒿�땲�떎.");
 		} catch (ClassNotFoundException e) { 
 			e.printStackTrace();
 		} catch (SQLException e) { 
@@ -35,7 +35,7 @@ public class JDBCConnector {
 		try {
 			Statement stmt = con.createStatement();
 			String sql = "select * from movie";
-			ResultSet rs = stmt.executeQuery(sql);  // sql ��ɾ��� �������� �޼ҵ尡 �ٸ���.
+			ResultSet rs = stmt.executeQuery(sql);  // sql 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占쌨소드가 占쌕몌옙占쏙옙.
 			while (rs.next()) {
 				System.out.print(rs.getInt("movie_id") + "\t");
 				System.out.print(rs.getInt("user") + "\t");

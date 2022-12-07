@@ -59,11 +59,20 @@ public class TiktokDAO {
     
     public ArrayList<MovieVO> GetMovieDatas(Connection con, int movieId) {
         ArrayList<MovieVO> movieList = new ArrayList<MovieVO>();
+        String query;
         
         try {
-            String query = "SELECT movie_id, user, len, song FROM movie WHERE movie_id = ?";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, "%" + movieId  + "%");
+        	
+        	if(movieId==0) {
+        		
+        		query = "SELECT movie_id, user, len, song FROM movie";	
+        	}else {
+        		query = "SELECT movie_id, user, len, song FROM movie WHERE movie_id = ?";		
+        	}
+        	
+        	PreparedStatement ps = con.prepareStatement(query);
+            if(movieId!=0)
+            	ps.setString(1, "%" + movieId  + "%");
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {

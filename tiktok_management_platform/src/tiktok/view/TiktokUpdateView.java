@@ -22,7 +22,7 @@ public class TiktokUpdateView extends JPanel{
 	DefaultTableModel model;
 	String searchWord;
 	JPanel panS = new JPanel(new GridLayout(4,4));
-	String [] header = {"영상 번호", "유저 이름", "영상 길이", "사용된 음악"};
+	String [] header = {"영상 번호", "영상 길이", "유저 이름", "사용된 음악"};
 	JLabel [] lbls = new JLabel[header.length];
 	JTextField [] tf = new JTextField[lbls.length - 1];
 	JButton btnUpdate = new JButton("영상 수정");
@@ -70,8 +70,8 @@ public class TiktokUpdateView extends JPanel{
 		table = new JTable(model);
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);
 		table.getColumnModel().getColumn(1).setPreferredWidth(200);
-		table.getColumnModel().getColumn(4).setPreferredWidth(50);
-		table.getColumnModel().getColumn(5).setPreferredWidth(50);
+		table.getColumnModel().getColumn(2).setPreferredWidth(50);
+		table.getColumnModel().getColumn(3).setPreferredWidth(50);
 	
 		JScrollPane scroll = new JScrollPane(table);
 		
@@ -86,7 +86,8 @@ public class TiktokUpdateView extends JPanel{
 			vo = MovieVOList.get(i);
 			model.setValueAt(vo.getMovieId(), i, 0);
 			model.setValueAt(vo.getLen(), i, 1);
-			model.setValueAt(vo.getSong(), i, 2);
+			model.setValueAt(vo.getUser(), i, 2);
+			model.setValueAt(vo.getSong(), i, 3);
 		}
 	}
 	

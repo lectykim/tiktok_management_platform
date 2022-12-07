@@ -31,7 +31,7 @@ public class TiktokController extends JFrame{
 	TiktokInsertView insertPan;
 	TiktokUpdateView updatePan;
 	JPanel panel;
-	JTable table;
+	JTable table = new JTable();
 	static final int YES = 0;
 	public TiktokController() {
 		JTabbedPane tab = new JTabbedPane();
@@ -41,7 +41,7 @@ public class TiktokController extends JFrame{
 		
 		// 영상 검색
 		searchPan = new TiktokSearchView();
-		MovieVOList = dao.GetMovieDatas(con, searchPan.getMovieId()); 
+		MovieVOList = dao.GetMovieDatas(con, 0); 
 		searchPan.setMovieVOList(MovieVOList);
 		JButton btnSearch = searchPan.getBtnSearch();
 		btnSearch.addActionListener(btnL);
@@ -49,7 +49,7 @@ public class TiktokController extends JFrame{
 		
 		// 영상 추가
 		insertPan = new TiktokInsertView();
-		MovieVOList = dao.GetMovieDatas(con, insertPan.getMovieId()); 
+		MovieVOList = dao.GetMovieDatas(con, 0); 
 		insertPan.setMovieVOList(MovieVOList);
 		JButton btnAdd = insertPan.getBtnAdd();
 		btnAdd.addActionListener(btnAddL);

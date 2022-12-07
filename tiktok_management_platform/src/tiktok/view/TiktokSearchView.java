@@ -49,7 +49,7 @@ public class TiktokSearchView extends JPanel{
 		panN.add(btnSearch);
 	}
 	public void initView() {
-		String [] header = {"영상 번호", "유저 이름", "영상 길이", "사용된 음악"};
+		String [] header = {"영상 번호", "영상 길이", "유저 이름", "사용된 음악"};
 		model = new DefaultTableModel(header, MovieVOList.size()) {
 			@Override
 			public boolean isCellEditable(int row, int column) {		
@@ -62,8 +62,8 @@ public class TiktokSearchView extends JPanel{
 		table = new JTable(model);
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);
 		table.getColumnModel().getColumn(1).setPreferredWidth(200);
-		table.getColumnModel().getColumn(4).setPreferredWidth(50);
-		table.getColumnModel().getColumn(5).setPreferredWidth(50);
+		table.getColumnModel().getColumn(2).setPreferredWidth(50);
+		table.getColumnModel().getColumn(3).setPreferredWidth(50);
 		
 		JScrollPane scroll = new JScrollPane(table);
 		
@@ -91,6 +91,8 @@ public class TiktokSearchView extends JPanel{
 	// getter method
 	public int getMovieId() {
 		searchWord = tf.getText();
+		if(searchWord=="")
+			searchWord="0";
 		return Integer.parseInt(searchWord);
 	}
 	public JButton getBtnSearch() {

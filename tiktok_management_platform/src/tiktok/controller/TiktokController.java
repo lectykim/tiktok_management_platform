@@ -31,7 +31,7 @@ public class TiktokController extends JFrame{
 	TiktokInsertView insertPan;
 	TiktokUpdateView updatePan;
 	JPanel panel;
-	JTable table = new JTable();
+	JTable table;
 	static final int YES = 0;
 	public TiktokController() {
 		JTabbedPane tab = new JTabbedPane();
@@ -43,9 +43,10 @@ public class TiktokController extends JFrame{
 		searchPan = new TiktokSearchView();
 		MovieVOList = dao.GetMovieDatas(con, 0); 
 		searchPan.setMovieVOList(MovieVOList);
+		searchPan.initView(); // 호출
 		JButton btnSearch = searchPan.getBtnSearch();
 		btnSearch.addActionListener(btnL);
-		searchPan.initView(); // 호출
+		
 		
 		// 영상 추가
 		insertPan = new TiktokInsertView();
@@ -62,8 +63,10 @@ public class TiktokController extends JFrame{
 		updatePan.setMovieVOList(MovieVOList);
 		JButton btnUpdate = updatePan.getBtnUpdate();
 		btnUpdate.addActionListener(btnUpdateL);
-		table.addMouseListener(tableL); 
 		updatePan.initView(); // 호출 table = updatePan.getTable();
+		table = updatePan.getTable();
+		table.addMouseListener(tableL); 
+
 		 
 				
 		tab.add("제목 검색", searchPan);
@@ -72,30 +75,12 @@ public class TiktokController extends JFrame{
 		add(tab);
 		
 		// JFrame
-		setTitle("도서관");
+		setTitle("틱톡 영상관리 플랫폼");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(300, 500, 600, 500);
 		setVisible(true);
 	}
-	static final int SEARCH_PAN = 0;
-	static final int INSERT_PAN = 1;
-	static final int UPDATE_PAN = 2;
-	public void updateView(JPanel pan, int panType) {
-		TiktokSearchView sPan = null;
-		TiktokInsertView iPan = null;
-		TiktokUpdateView uPan = null;
-		switch (panType) {
-		case SEARCH_PAN:
-			sPan = (TiktokSearchView)pan;
-			break;
-		case INSERT_PAN:
-			iPan = (TiktokInsertView)pan;
-			break;
-		case UPDATE_PAN:
-			uPan = (TiktokUpdateView)pan;
-			break;
-		}
-	}
+
 	MouseAdapter tableL = new MouseAdapter() {
 		public void mouseClicked(MouseEvent e) 
 		{
@@ -108,7 +93,9 @@ public class TiktokController extends JFrame{
 				if(result == YES) {
 					MovieVO vo = updatePan.neededUpdateData();
 					dao.Delete(vo);
-					updateView(updatePan, result);
+					MovieVOList = dao.GetMovieDatas(con, 0);
+					updatePan.setMovieVOList(MovieVOList);
+					updatePan.putSearchResult();
 				}
 			}
 		};
@@ -117,7 +104,7 @@ public class TiktokController extends JFrame{
 	ActionListener btnL = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("is called");
+			System.out.println("movieid : "+searchPan.getMovieId());
 			MovieVOList = dao.GetMovieDatas(con, searchPan.getMovieId());
 			for(MovieVO mv:MovieVOList) {
 				System.out.println(mv.getMovieId());
@@ -133,7 +120,7 @@ public class TiktokController extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			MovieVO vo = insertPan.neededInsertData();
 			dao.insert(vo);
-			MovieVOList = dao.GetMovieDatas(con, insertPan.getMovieId());
+			MovieVOList = dao.GetMovieDatas(con, 0);
 			insertPan.setMovieVOList(MovieVOList);
 			insertPan.putSearchResult();
 			insertPan.initData();
@@ -146,7 +133,7 @@ public class TiktokController extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			MovieVO vo = updatePan.neededUpdateData();
 			dao.Update(vo);
-			MovieVOList = dao.GetMovieDatas(con, updatePan.getMovieId());
+			MovieVOList = dao.GetMovieDatas(con, 0);
 			updatePan.setMovieVOList(MovieVOList);
 			updatePan.putSearchResult();
 		}

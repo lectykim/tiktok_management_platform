@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import tiktok.dao.JDBCConnector;
 import tiktok.vo.MovieVO;
@@ -72,7 +73,7 @@ public class TiktokDAO {
         	
         	PreparedStatement ps = con.prepareStatement(query);
             if(movieId!=0)
-            	ps.setString(1, "%" + movieId  + "%");
+            	ps.setInt(1,movieId);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
@@ -92,14 +93,15 @@ public class TiktokDAO {
     public void insert(MovieVO vo){
 		Connection con = JDBCConnector.getCon();
 		PreparedStatement pstmt = null;
-		String sql = "insert into movie values(?, ?, ?, ?)";
+		//INSERT INTO `tiktok_management`.`movie` (`user`, `len`, `song`) VALUES ('1', '2:22', '3');
+		String sql = "insert into movie(user,len,song) values(?,?,?)";
+		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getMovieId());
-			pstmt.setInt(2, vo.getUser());
-			pstmt.setString(3, vo.getLen());
-			pstmt.setInt(4, vo.getSong());
 			
+			pstmt.setInt(1, vo.getUser());
+			pstmt.setString(2, vo.getLen());
+			pstmt.setInt(3, vo.getSong());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -118,13 +120,14 @@ public class TiktokDAO {
     public void Update(MovieVO vo){
 		Connection con = JDBCConnector.getCon();
 		PreparedStatement pstmt = null;
-		String sql = "update book set movie_id=?, user=?, len=?, song=?;"; 
+		String sql = "update movie set user=?, len=?, song=? where movie_id=?;"; 
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getMovieId());
-			pstmt.setInt(2, vo.getUser());
-			pstmt.setString(3, vo.getLen());
-			pstmt.setInt(4, vo.getSong());
+			
+			pstmt.setInt(1, vo.getUser());
+			pstmt.setString(2, vo.getLen());
+			pstmt.setInt(3, vo.getSong());
+			pstmt.setInt(4, vo.getMovieId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -162,6 +165,61 @@ public class TiktokDAO {
 			}
 		}
 	}
+    
+    public String TransferStrToInt(int num,int SELECTOR) {
+    	String sql;
+    	PreparedStatement pstmt=null;
+    	Connection con = JDBCConnector.getCon();
+    	ResultSet rs;
+    	String rt,result="";
+    	if(SELECTOR==0) {
+    		sql = "select nickname from user where uid=?";
+    		rt = "nickname";
+    	}else {
+    		sql = "select title from music where music_id=?";
+    		rt = "title";
+    	}
+    	try {
+            pstmt = con.prepareStatement(sql);
+            ps.setInt(1, num);
+             rs = ps.executeQuery();
+         	while(rs.next()) {
+        		result = rs.getString(rt);
+        	}
+    	}catch (Exception e) {
+    		System.out.println("Failed");
+    	}
+    	return result;
+    }
+    
+    public int TransferIntToStr(String str,int SELECTOR) {
+    	String sql;
+    	PreparedStatement pstmt=null;
+    	Connection con = JDBCConnector.getCon();
+    	ResultSet rs;
+    	String rt;
+    	int result = 0;
+    	if(SELECTOR==0) {
+    		sql = "select uid from user where nickname=?";
+    		rt = "uid";
+    	}else {
+    		sql = "select music_id from music where title=?";
+    		rt = "music_id";
+    	}
+    	try {
+            pstmt = con.prepareStatement(sql);
+            ps.setString(1, str);
+             rs = ps.executeQuery();
+         	while(rs.next()) {
+        		result = rs.getInt(rt);
+        	}
+    	}catch (Exception e) {
+    		System.out.println("Failed");
+    	}
+    	return result;
+    }
+    
+    
 
 	
 }

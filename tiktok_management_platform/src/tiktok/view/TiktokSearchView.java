@@ -79,7 +79,8 @@ public class TiktokSearchView extends JPanel{
 			vo = MovieVOList.get(i);
 			model.setValueAt(vo.getMovieId(), i, 0);
 			model.setValueAt(vo.getLen(), i, 1);
-			model.setValueAt(vo.getSong(), i, 2);
+			model.setValueAt(vo.getUser(), i, 2);
+			model.setValueAt(vo.getSong(), i,3);
 		
 		}
 	}

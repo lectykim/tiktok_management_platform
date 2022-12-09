@@ -23,7 +23,7 @@ public class TiktokInsertView extends JPanel {
 	JPanel panS = new JPanel(new GridLayout(4,4));
 	String [] header = {"영상 번호", "영상 길이", "유저 이름", "사용된 음악"};
 	JLabel [] lbls = new JLabel[header.length];
-	JTextField [] tf = new JTextField[lbls.length - 1];
+	JTextField [] tf = new JTextField[lbls.length];
 	JButton btnAdd = new JButton("영상 추가");
 	public TiktokInsertView() {
 		
@@ -31,12 +31,13 @@ public class TiktokInsertView extends JPanel {
 		for(int i = 0; i < header.length; i++) {
 			lbls[i] = new JLabel(header[i]);
 			panS.add(lbls[i]);
-			if(i < header.length - 1){
+			if(i < header.length){
 				tf[i] = new JTextField();
 				panS.add(tf[i]);
 			}
 		}
-		for(int i = 0; i < 3; i++)
+		tf[0].setEditable(false);
+		for(int i = 0; i < 4; i++)
 		{
 			panS.add(new JLabel(""));
 		}
@@ -93,15 +94,15 @@ public class TiktokInsertView extends JPanel {
 	}
 	public MovieVO neededInsertData() {
 		MovieVO vo = new MovieVO();
-		vo.setMovieId(Integer.parseInt(tf[0].getText()));
 		vo.setLen(tf[1].getText());
 		vo.setSong(Integer.parseInt(tf[2].getText()));
+		vo.setUser(Integer.parseInt(tf[3].getText()));
 		return vo;
 	}
 	// getter method
 		
-	public int getMovieId() {
-		searchword = tf[0].getText();
-		return Integer.parseInt(searchword);
-	}
+//	public int getMovieId() {
+//		searchword = tf[0].getText();
+//		return Integer.parseInt(searchword);
+//	}
 }

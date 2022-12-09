@@ -24,7 +24,7 @@ public class TiktokUpdateView extends JPanel{
 	JPanel panS = new JPanel(new GridLayout(4,4));
 	String [] header = {"영상 번호", "영상 길이", "유저 이름", "사용된 음악"};
 	JLabel [] lbls = new JLabel[header.length];
-	JTextField [] tf = new JTextField[lbls.length - 1];
+	JTextField [] tf = new JTextField[lbls.length];
 	JButton btnUpdate = new JButton("영상 수정");
 	
 	public TiktokUpdateView() {
@@ -32,7 +32,7 @@ public class TiktokUpdateView extends JPanel{
 		for(int i = 0; i < header.length; i++) {
 			lbls[i] = new JLabel(header[i]);
 			panS.add(lbls[i]);
-			if(i < header.length - 1){
+			if(i < header.length){
 				tf[i] = new JTextField();
 				panS.add(tf[i]);
 			}
@@ -40,7 +40,7 @@ public class TiktokUpdateView extends JPanel{
 		// 영상 번호 편집 불가.
 		tf[0].setEditable(false);
 				
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < 4; i++)
 		{
 			panS.add(new JLabel(""));
 		}
@@ -104,6 +104,7 @@ public class TiktokUpdateView extends JPanel{
 		vo.setMovieId(Integer.parseInt(tf[0].getText()));
 		vo.setLen(tf[1].getText());
 		vo.setSong(Integer.parseInt(tf[2].getText()));
+		vo.setUser(Integer.parseInt(tf[3].getText()));
 		return vo;
 	}
 	

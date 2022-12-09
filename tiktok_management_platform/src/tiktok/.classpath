@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="vo"/>
+	<classpathentry kind="src" path="controller"/>
+	<classpathentry kind="src" path="dao"/>
+	<classpathentry kind="src" path="view"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/master/Desktop/프로젝트 모음/tiktok/tiktokt2/tiktok_management_platform/tiktok_management_platform/mysql-connector-java-8.0.30.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
